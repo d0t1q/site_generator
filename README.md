@@ -7,6 +7,6 @@ Windows OS
 
 be sure to set your relative paths 
 
-minpath="G:\\\Minis\\\"
+minpath="G:\\\Minis\\\\"
 
-web="G:\\\Minis\\\Web\\\"
+web="G:\\\Minis\\\Web\\\\"

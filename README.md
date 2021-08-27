@@ -1,8 +1,7 @@
 # site_generator
 **Windows OS**
 
-Generates a website based subfolders and release images for my miniature collection 
-
+Generates a website based on subfolders and release images from minature collections
 requires pillow
 ```
 pip3 isntall -r requirements.txt
@@ -27,3 +26,7 @@ Drive:.
 
 **Result**
 ![example](https://github.com/d0t1q/site_generator/blob/main/example.jpg?raw=truee)
+
+
+**Too Doo**
+Add the ability to auto-rename image files to match parent folders 

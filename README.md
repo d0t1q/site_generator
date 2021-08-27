@@ -24,3 +24,6 @@ Drive:.
 │   ├───Agama_Rising - (release folder, this isn't important)
 │   └───ArchVillain-Agama_Rising.png (Release image, MUST start with "creator-" and is case sensitive based on the parent folder name)
 ```
+
+**Result**
+![example](https://github.com/d0t1q/site_generator/blob/main/example.jpg?raw=truee)

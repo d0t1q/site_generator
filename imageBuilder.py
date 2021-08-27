@@ -1,11 +1,14 @@
 import os
 import shutil
+from PIL import Image
+import PIL
+import glob
 
 minpath="G:\\Minis\\"
 web="G:\\Minis\\Web\\"
 images=[]
 webimages=[]
-extensions=[".jpg",".png"]
+extensions=["jpg","png","jpeg"]
 
 #Build Creator list from top level directories
 for dirs in os.walk(minpath):
@@ -36,7 +39,13 @@ for root, dirs, files in os.walk(web):
     for file in files:
         for i in creators:
             if file.startswith("{}-".format(i)):
-                webimages.append(os.path.join(file))
+                webimages.append(file)
+#compress
+images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
+for image in images:
+    img = Image.open(web+image)
+    img.save(web+image, optimize=True, quality=20)
+
 
 #Build the website
 #build index

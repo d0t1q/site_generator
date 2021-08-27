@@ -44,7 +44,7 @@ for root, dirs, files in os.walk(web):
 images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
 for image in images:
     img = Image.open(web+image)
-    img.save(web+image, optimize=True, quality=20)
+    img.save(web+image, optimize=True, quality=40)
 
 
 #Build the website

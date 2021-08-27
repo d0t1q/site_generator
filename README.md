@@ -1,10 +1,10 @@
 # site_generator
 **Windows OS**
 
-Generates a website based on subfolders and release images from minature collections
+Generates a website based on subfolders and release images from miniature collections
 requires pillow
 ```
-pip3 isntall -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 usage: ./imageBuilder.py

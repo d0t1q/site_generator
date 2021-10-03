@@ -4,14 +4,24 @@ from PIL import Image
 import PIL
 import glob
 
-minpath="G:\\Minis\\"
-web="G:\\Minis\\Web\\"
+#Set your folder path for your miniature collection
+minpath="Z:\\Minis\\"
+
+#Set the content path for your generated website
+web="Z:\\Minis\\Web\\"
+
 images=[]
 webimages=[]
+
+#Add more extensions here if needed 
 extensions=["jpg","png","jpeg"]
+
+#Add folders that you want ignored from Z:\\Minis\\"
+ignore=["Notes", "Random", "Web"]
 
 #Build Creator list from top level directories
 for dirs in os.walk(minpath):
+  if dirs not in ignore:
     creators=next(os.walk(minpath))[1]  
 
 
@@ -40,11 +50,12 @@ for root, dirs, files in os.walk(web):
         for i in creators:
             if file.startswith("{}-".format(i)):
                 webimages.append(file)
-#compress
+#compress+thumbnail 
 images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
 for image in images:
     img = Image.open(web+image)
-    img.save(web+image, optimize=True, quality=40)
+    img.thumbnail([1920, 1920],PIL.Image.ANTIALIAS)
+    img.save(web+image, optimize=True, quality=80)
 
 
 #Build the website

@@ -41,4 +41,5 @@ Add the ability to auto-rename image files to match parent folders
 20211018:
 * Added output to state what script is currently doing 
 * Added pil method to convert image to 'RGB' - will hopefuly remove any unneeded alpha data. 
+* Added TQDM progress bar output
 * removed glob library as its not in use

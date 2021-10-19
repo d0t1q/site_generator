@@ -29,8 +29,7 @@ print("Gathering Creators")
 for dirs in tqdm(os.walk(minpath)):
     creators0=next(os.walk(minpath))[1]  
 creators = [x for x in creators0 if x not in ignore]
-lenoc = len(creators)
-print("Gathered {} different Creators".format(lenoc))
+print("Gathered {} different Creators".format(len(creators)))
 
 #Gather Top level Images
 print("Gathering Images from each creator")
@@ -40,11 +39,10 @@ for root, dirs, files in tqdm(os.walk(minpath)):
             if file.startswith("{}-".format(i)):
                 if file.endswith(tuple(extensions)):
                     images.append(os.path.join(root, file))
-lenoi = len(images)
-print("Gathered {} total images for Website".format(lenoi))                   
+print("Gathered {} total images for Website".format(len(images)))                
 
 #Copy Files to Web folder
-print("Copying {} images to web directory".format(lenoi))
+print("Copying {} images to web directory".format(len(images)))
 for x in tqdm(images):
     try:
         shutil.copy(x, web)

@@ -2,41 +2,48 @@ import os
 import shutil
 from PIL import Image
 import PIL
-import glob
 
-#Set your folder path for your miniature collection
 minpath="Z:\\Minis\\"
-
-#Set the content path for your generated website
 web="Z:\\Minis\\Web\\"
-
 images=[]
 webimages=[]
-
-#Add more extensions here if needed 
 extensions=["jpg","png","jpeg"]
-
-#Add folders that you want ignored from Z:\\Minis\\"
 ignore=["Notes", "Random", "Web"]
 
+
+#Check if Web Directory Exists
+print("Checking if Web Dir Exists")
+if not os.path.exists(web):
+    os.makedirs(web)
+    print("Created Web Directory {}".format(web))
+else:
+    print("Web Director already exists")
+    print("Removing old directory")
+    shutil.rmtree(web)
+    os.makedirs(web)
+    print("Created Web Directory {}".format(web))
+
+print("Gathering Creators")
 #Build Creator list from top level directories
 for dirs in os.walk(minpath):
   if dirs not in ignore:
     creators=next(os.walk(minpath))[1]  
-
+lenoc = len(creators)
+print("Gathered {} different Creators".format(lenoc))
 
 #Gather Top level Images
+print("Gathering Images from each creator")
 for root, dirs, files in os.walk(minpath):
     for file in files:
         for i in creators:
             if file.startswith("{}-".format(i)):
                 if file.endswith(tuple(extensions)):
                     images.append(os.path.join(root, file))
+lenoi = len(images)
+print("Gathered {} total images for Website".format(lenoi))                   
 
-#Check if Web Directory Exists
-if not os.path.exists(web):
-    os.makedirs(web)
 #Copy Files to Web folder
+print("Copying {} images to web directory".format(lenoi))
 for x in images:
     try:
         shutil.copy(x, web)
@@ -45,21 +52,32 @@ for x in images:
 
 #Compile web dir
 i=0
+print("Gathering Web directory paths")
 for root, dirs, files in os.walk(web):
     for file in files:
         for i in creators:
             if file.startswith("{}-".format(i)):
                 webimages.append(file)
+
+#gather size of directory
+sizeod = sum(d.stat().st_size for d in os.scandir(web) if d.is_file())
+sizeod = sizeod/1024/1024
 #compress+thumbnail 
 images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
+print("Comrpessing and converting Images")
+print("Size of web directory before comrpession: {:0.2f} MB".format(sizeod))
 for image in images:
     img = Image.open(web+image)
     img.thumbnail([1920, 1920],PIL.Image.ANTIALIAS)
+    img = img.convert('RGB')
     img.save(web+image, optimize=True, quality=80)
-
+sizeod = sum(d.stat().st_size for d in os.scandir(web) if d.is_file())
+sizeod = sizeod/1024/1024
+print("Size of web directory after comrpession: {:0.2f} MB".format(sizeod))
 
 #Build the website
 #build index
+print("Writing Index file")
 f=open(web+"index.html","w")
 f.truncate()
 f.write("""<link rel="stylesheet" href="style.css">
@@ -70,7 +88,7 @@ f.close()
 
 f=open(web+"index.html","a")
 for i in webimages:
-    f.write("<div class=\"card card-tall card-wide\" style=\"background-image: url(\'{}\')\" onclick=\"window.location.href=\'{}\';\"></div>\n".format(i,i))
+  f.write("<div class=\"card card-tall card-wide\" style=\"background-image: url(\'{}\')\" onclick=\"window.location.href=\'{}\';\"></div>\n".format(i,i))
 f.close()
 f=open(web+"index.html","a")
 f.write("""  </main>
@@ -83,6 +101,7 @@ f.close()
 
 
 #generate css
+print("Generating CSS")
 f=open(web+"style.css","w")
 f.truncate()
 f.write(""".image-mosaic {
@@ -141,3 +160,4 @@ aside {
   background: #81cfd9;
 }""")
 f.close()
+print("COMPLETED")

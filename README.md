@@ -31,6 +31,11 @@ Drive:.
 ```
 
 **Result**
+Output of script 
+![image](https://user-images.githubusercontent.com/8010159/137825303-5d9a7575-ca80-4c09-868d-39e031ca96b2.png)
+
+Example Website generated
+
 ![example](https://github.com/d0t1q/site_generator/blob/main/example.jpg?raw=truee)
 
 

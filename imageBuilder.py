@@ -2,6 +2,7 @@ import os
 import shutil
 from PIL import Image
 import PIL
+from tqdm import tqdm
 
 minpath="Z:\\Minis\\"
 web="Z:\\Minis\\Web\\"
@@ -44,7 +45,7 @@ print("Gathered {} total images for Website".format(lenoi))
 
 #Copy Files to Web folder
 print("Copying {} images to web directory".format(lenoi))
-for x in images:
+for x in tqdm(images):
     try:
         shutil.copy(x, web)
     except Exception:
@@ -66,7 +67,7 @@ sizeod = sizeod/1024/1024
 images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
 print("Comrpessing and converting Images")
 print("Size of web directory before comrpession: {:0.2f} MB".format(sizeod))
-for image in images:
+for image in tqdm(images):
     img = Image.open(web+image)
     img.thumbnail([1920, 1920],PIL.Image.ANTIALIAS)
     img = img.convert('RGB')

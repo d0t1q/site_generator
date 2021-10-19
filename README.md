@@ -37,3 +37,7 @@ Add the ability to auto-rename image files to match parent folders
 20211003:
 * Added in compression and thumbnail pictures rather than linking directly to possibile 4K/8K images, this resulted in a 75% reduction in content size 
 * Added in an ignore list so that certain folder names don't get included in the creator generation section 
+
+20211018:
+* Added output to state what script is currently doing 
+* removed glob library as its not in use

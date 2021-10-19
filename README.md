@@ -13,9 +13,9 @@ usage:
 ```
 be sure to set your relative paths in code
 ```
-minpath="Z:\\\Minis\\\\"
+minpath="Z:\\\Minis\\"
 
-web="Z:\\\Minis\\\Web\\\\"
+web="Z:\\Minis\\Web\\"
 ```
 Update the ignore list incase you have any directories that should be ignored 
 ```

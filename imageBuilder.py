@@ -26,15 +26,15 @@ else:
 
 print("Gathering Creators")
 #Build Creator list from top level directories
-for dirs in os.walk(minpath):
-  if dirs not in ignore:
-    creators=next(os.walk(minpath))[1]  
+for dirs in tqdm(os.walk(minpath)):
+    creators0=next(os.walk(minpath))[1]  
+creators = [x for x in creators0 if x not in ignore]
 lenoc = len(creators)
 print("Gathered {} different Creators".format(lenoc))
 
 #Gather Top level Images
 print("Gathering Images from each creator")
-for root, dirs, files in os.walk(minpath):
+for root, dirs, files in tqdm(os.walk(minpath)):
     for file in files:
         for i in creators:
             if file.startswith("{}-".format(i)):

@@ -7,14 +7,20 @@ requires pillow
 pip3 install -r requirements.txt
 ```
 
-usage: ./imageBuilder.py
-
+usage: 
+```
+./imageBuilder.py
+```
 be sure to set your relative paths in code
+```
+minpath="Z:\\\Minis\\\\"
 
-minpath="G:\\\Minis\\\\"
-
-web="G:\\\Minis\\\Web\\\\"
-
+web="Z:\\\Minis\\\Web\\\\"
+```
+Update the ignore list incase you have any directories that should be ignored 
+```
+ignore=["Notes", "Random", "Web"]
+```
 Collection directory must be structured as follows: 
 
 ```

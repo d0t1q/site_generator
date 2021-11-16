@@ -18,11 +18,11 @@ if not os.path.exists(web):
     os.makedirs(web)
     print("Created Web Directory {}".format(web))
 else:
-    print("Web Director already exists")
-    print("Removing old directory")
-    shutil.rmtree(web)
-    os.makedirs(web)
-    print("Created Web Directory {}".format(web))
+  print("Web Director already exists")
+  print("Removing old directory")
+  shutil.rmtree(web)
+  os.makedirs(web)
+  print("Created Web Directory {}".format(web))
 
 print("Gathering Creators")
 #Build Creator list from top level directories
@@ -66,10 +66,11 @@ images = [file for file in os.listdir(web) if file.endswith(tuple(extensions))]
 print("Comrpessing and converting Images")
 print("Size of web directory before comrpession: {:0.2f} MB".format(sizeod))
 for image in tqdm(images):
+    img = Image.MAX_IMAGE_PIXELS = None
     img = Image.open(web+image)
     img.thumbnail([1920, 1920],PIL.Image.ANTIALIAS)
-    img = img.convert('RGB')
-    img.save(web+image, optimize=True, quality=80)
+    img = img.convert('RGB').save(web+image,"JPEG", optimize=True, quality=80)
+    #img.save(web+image, optimize=True, quality=80)
 sizeod = sum(d.stat().st_size for d in os.scandir(web) if d.is_file())
 sizeod = sizeod/1024/1024
 print("Size of web directory after comrpession: {:0.2f} MB".format(sizeod))
@@ -80,8 +81,6 @@ print("Writing Index file")
 f=open(web+"index.html","w")
 f.truncate()
 f.write("""<link rel="stylesheet" href="style.css">
-<div class="container">
-  <main>
 <div class="image-mosaic"> """)
 f.close()
 
@@ -89,15 +88,6 @@ f=open(web+"index.html","a")
 for i in webimages:
   f.write("<div class=\"card card-tall card-wide\" style=\"background-image: url(\'{}\')\" onclick=\"window.location.href=\'{}\';\"></div>\n".format(i,i))
 f.close()
-f=open(web+"index.html","a")
-f.write("""  </main>
-  <aside> Creators:\n""")
-for i in creators:
-    f.write("<br>{}\r\n".format(i))
-f.write(""" </aside>
-</div> """)
-f.close()
-
 
 #generate css
 print("Generating CSS")

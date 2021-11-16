@@ -33,7 +33,9 @@ Drive:.
 **Result**
 
 Output of script 
-![image](https://user-images.githubusercontent.com/8010159/137825303-5d9a7575-ca80-4c09-868d-39e031ca96b2.png)
+
+![image](https://user-images.githubusercontent.com/8010159/142051541-c7482ba1-637f-41ab-bc66-72d8b9796b99.png)
+
 
 Example Website generated
 
@@ -56,3 +58,8 @@ Add the ability to auto-rename image files to match parent folders
 * Added TQDM progress bar output
 * Removed glob library as its not in use
 * Fixed the Ignore method as it wasn't properly implimented
+
+20211116:
+* Modified Compression settings, pil method now converts to JPEG - This resulted in a 90% decrease in overal directory size
+* Updated logic to first remove any pre-existing Wed directory before executing
+* Removed side banner
